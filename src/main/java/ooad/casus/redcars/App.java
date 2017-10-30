@@ -12,7 +12,7 @@ public class App {
 
     private void testBetaling() {
         AutoType autoType = AutoType.STATION;
-        Reservering reservering = new Reservering(PeriodeType.UUR, 8, autoType);
+        Reservering reservering = new Reservering(PeriodeType.UUR, 4, autoType);
         System.out.println(reservering.berekenKosten(AbonnementType.BETAALD));
     }
 }
