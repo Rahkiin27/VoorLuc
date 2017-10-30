@@ -1,6 +1,5 @@
 package ooad.casus.redcars;
 
-import ooad.casus.redcars.enums.PeriodeType;
 import ooad.casus.redcars.strategies.IBetalingStrategy;
 
 public class BetalingBerekeningen {
