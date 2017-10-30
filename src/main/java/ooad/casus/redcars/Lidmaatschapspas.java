@@ -2,10 +2,10 @@ package ooad.casus.redcars;
 
 import java.util.Random;
 
-class Lidmaatschapspas {
+public class Lidmaatschapspas {
     private long pasnummer;
 
-    Lidmaatschapspas() {
+    public Lidmaatschapspas() {
         Random rnd = new Random();
         pasnummer = 100000 + rnd.nextInt(900000);
     }

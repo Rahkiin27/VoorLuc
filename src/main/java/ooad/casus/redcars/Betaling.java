@@ -5,12 +5,12 @@ import ooad.casus.redcars.enums.AutoType;
 import ooad.casus.redcars.enums.PeriodeType;
 import ooad.casus.redcars.strategies.*;
 
-class Betaling {
+public class Betaling {
     private IBetalingStrategy betalingStrategy;
     private PeriodeType periodeType;
     private double kilometers;
 
-    Betaling(AbonnementType abonnementType, PeriodeType periodeType, AutoType autoType, double kilometers) {
+    public Betaling(AbonnementType abonnementType, PeriodeType periodeType, AutoType autoType, double kilometers) {
         this.periodeType = periodeType;
         this.kilometers = kilometers;
         switch(abonnementType) {
@@ -33,7 +33,7 @@ class Betaling {
         }
     }
 
-    double berekenTotaalprijs(int periodeDuur, int urenGereden) {
+    public double berekenTotaalprijs(int periodeDuur, int urenGereden) {
         int periodeOverschredenUren = 0;
         switch(periodeType) {
             case UUR:
