@@ -1,6 +1,10 @@
 package ooad.casus.redcars;
 
 import ooad.casus.redcars.enums.AbonnementType;
+import ooad.casus.redcars.enums.AutoType;
+import ooad.casus.redcars.enums.PeriodeType;
+
+import java.time.LocalDateTime;
 
 public class Gebruiker {
     private String voornaam, achternaam, email, adres, woonplaats, bankrekeningnummer;
@@ -15,5 +19,9 @@ public class Gebruiker {
         this.woonplaats = woonplaats;
         this.abonnementType = abonnementType;
         this.bankrekeningnummer = bankrekeningnummer;
+    }
+
+    public void maakReservering() {
+        Reservering reservering = new Reservering(PeriodeType.DAG, AutoType.STATION, LocalDateTime.now());
     }
 }

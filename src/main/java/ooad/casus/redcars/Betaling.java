@@ -1,80 +1,50 @@
 package ooad.casus.redcars;
 
-import ooad.casus.redcars.enums.AbonnementType;
-import ooad.casus.redcars.enums.AutoType;
 import ooad.casus.redcars.enums.PeriodeType;
-import ooad.casus.redcars.strategies.*;
+import ooad.casus.redcars.strategies.IBetalingStrategy;
 
 public class Betaling {
     private IBetalingStrategy betalingStrategy;
-    private BetalingBerekeningen berekening;
     private PeriodeType periodeType;
+    private double geredenKilometers;
+    private int overschredenUren;
 
-    public Betaling(AbonnementType abonnementType, PeriodeType periodeType, AutoType autoType, double kilometers) {
+    public Betaling(PeriodeType periodeType, double geredenKilometers, int overschredenUren) {
         this.periodeType = periodeType;
-        switch(abonnementType) {
-            case BETAALD:
-                switch (autoType) {
-                    case PERSONEN:
-                        betalingStrategy = new PersonenautoBetaaldAbonnementStrategy();
-                        break;
-                    case STATION:
-                        betalingStrategy = new StationwagenBetaaldAbonnementStrategy();
-                        break;
-                }
-                break;
-            case GRATIS:
-                switch (autoType) {
-                    case PERSONEN:
-                        betalingStrategy = new PersonenautoGratisAbonnementStrategy();
-                        break;
-                    case STATION:
-                        betalingStrategy = new StationwagenGratisAbonnementStrategy();
-                        break;
-                }
-                break;
-        }
-        berekening = new BetalingBerekeningen(betalingStrategy, kilometers);
+        this.geredenKilometers = geredenKilometers;
+        this.overschredenUren = overschredenUren;
     }
 
-    public double berekenTotaalprijs(int periodeDuur, int urenGereden) {
-        int periodeOverschredenUren = 0;
-        switch (periodeType) {
-            case UUR:
-                if (urenGereden > periodeDuur) {
-                    periodeOverschredenUren = urenGereden - periodeDuur;
-                }
-                break;
-            case DAG:
-                if (urenGereden > periodeDuur * 24) {
-                    periodeOverschredenUren = urenGereden - periodeDuur * 24;
-                }
-                break;
-            case WEEKEND:
-                if (urenGereden > periodeDuur * 48) {
-                    periodeOverschredenUren = urenGereden - periodeDuur * 48;
-                }
-                break;
-            case WEEK:
-                if (urenGereden > periodeDuur * 168) {
-                    periodeOverschredenUren = urenGereden - periodeDuur * 168;
-                }
-                break;
-        }
-        return berekening.berekenTotaalprijs(berekenPeriodePrijs(periodeType, periodeDuur), berekenPeriodePrijs(PeriodeType.UUR, periodeOverschredenUren));
+    public double berekenTotaalprijs() {
+        return berekenKilometerTotaalprijs() + berekenHuurprijs() + berekenBoeteBedrag();
     }
 
-    private double berekenPeriodePrijs(PeriodeType periodeType, int periode) {
+    private double berekenKilometerTotaalprijs() {
+        return betalingStrategy.getPrijsPerKilometer() * geredenKilometers;
+    }
+
+    private double berekenHuurprijs() {
         switch (periodeType) {
             case UUR:
-                return betalingStrategy.getPrijsPerUur() * periode;
+                return betalingStrategy.getPrijsPerUur();
             case DAG:
-                return betalingStrategy.getPrijsPerDag() * periode;
+                return betalingStrategy.getPrijsPerDag();
             case WEEKEND:
-                return betalingStrategy.getPrijsPerWeekend() * periode;
+                return betalingStrategy.getPrijsPerWeekend();
             case WEEK:
-                return betalingStrategy.getPrijsPerWeek() * periode;
+                return betalingStrategy.getPrijsPerWeek();
         }
         return 0;
+    }
+
+    private double berekenBoeteBedrag() {
+        if (overschredenUren > 0) {
+            return betalingStrategy.getPrijsPerUur() * overschredenUren;
+        }
+        return 0;
+    }
+
+    public void setBetalingStrategy(IBetalingStrategy betalingStrategy) {
+        this.betalingStrategy = betalingStrategy;
     }
 }
