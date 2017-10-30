@@ -13,6 +13,7 @@ public class Gebruiker {
         this.email = email;
         this.adres = adres;
         this.woonplaats = woonplaats;
+        this.abonnementType = abonnementType;
         this.bankrekeningnummer = bankrekeningnummer;
     }
 }

@@ -4,10 +4,8 @@ import ooad.casus.redcars.enums.AbonnementType;
 import ooad.casus.redcars.enums.AutoType;
 import ooad.casus.redcars.enums.PeriodeType;
 
-public class App
-{
-    public static void main( String[] args )
-    {
+public class App {
+    public static void main(String[] args) {
         App main = new App();
         main.testBetaling();
     }
