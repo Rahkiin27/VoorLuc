@@ -5,15 +5,14 @@ import ooad.casus.redcars.enums.AutoType;
 public class Auto {
     private String standplaats, kenteken;
     private double kilometerstand, vorigeKilometerstand;
-    private AutoType autoType;
     private int urenGereden;
 
-    public Auto(String standplaats, String kenteken, double kilometerstand, AutoType autoType) {
-        this.autoType = autoType;
+    public Auto(String standplaats, String kenteken, double kilometerstand) {
         this.standplaats = standplaats;
         this.kenteken = kenteken;
         this.kilometerstand = kilometerstand;
-        resetAuto();
+
+        vorigeKilometerstand = kilometerstand;
     }
 
     public double berekenKilometerVerschil() {
@@ -22,15 +21,6 @@ public class Auto {
 
     public void updateKilometerstand(double geredenKilometers) {
         kilometerstand = kilometerstand + geredenKilometers;
-    }
-
-    public void resetAuto() {
-        vorigeKilometerstand = kilometerstand;
-        urenGereden = 0;
-    }
-
-    public AutoType getAutoType() {
-        return autoType;
     }
 
     public int getAantalUrenGereden() {
