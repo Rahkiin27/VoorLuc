@@ -14,19 +14,23 @@ public class Betaling {
         this.periodeType = periodeType;
         switch(abonnementType) {
             case BETAALD:
-                if (autoType == AutoType.PERSONEN) {
-                    betalingStrategy = new PersonenautoBetaaldAbonnementStrategy();
-                }
-                else if (autoType == AutoType.STATION) {
-                    betalingStrategy = new StationwagenBetaaldAbonnementStrategy();
+                switch (autoType) {
+                    case PERSONEN:
+                        betalingStrategy = new PersonenautoBetaaldAbonnementStrategy();
+                        break;
+                    case STATION:
+                        betalingStrategy = new StationwagenBetaaldAbonnementStrategy();
+                        break;
                 }
                 break;
             case GRATIS:
-                if (autoType == AutoType.PERSONEN) {
-                    betalingStrategy = new PersonenautoGratisAbonnementStrategy();
-                }
-                else if (autoType == AutoType.STATION) {
-                    betalingStrategy= new StationwagenGratisAbonnementStrategy();
+                switch (autoType) {
+                    case PERSONEN:
+                        betalingStrategy = new PersonenautoGratisAbonnementStrategy();
+                        break;
+                    case STATION:
+                        betalingStrategy = new StationwagenGratisAbonnementStrategy();
+                        break;
                 }
                 break;
         }
