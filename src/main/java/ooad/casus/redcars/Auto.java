@@ -1,11 +1,9 @@
 package ooad.casus.redcars;
 
-import ooad.casus.redcars.enums.AutoType;
-
 public class Auto {
     private String standplaats, kenteken;
     private double kilometerstand, vorigeKilometerstand;
-    private int urenGereden;
+    private int urenGebruikt;
 
     public Auto(String standplaats, String kenteken, double kilometerstand) {
         this.standplaats = standplaats;
@@ -23,11 +21,11 @@ public class Auto {
         kilometerstand = kilometerstand + geredenKilometers;
     }
 
-    public int getAantalUrenGereden() {
-        return urenGereden;
+    public int getAantalUrenGebruikt() {
+        return urenGebruikt;
     }
 
-    public void setAantalUrenGereden(int uren) {
-        this.urenGereden = uren;
+    public void setAantalUrenGebruikt(int uren) {
+        this.urenGebruikt = uren;
     }
 }

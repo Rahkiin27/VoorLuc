@@ -26,12 +26,12 @@ public class Reservering {
         eindTijd = berekenEindTijd();
 
         auto = new Auto("Nijmegen", "FU-CK-ME", 100000);
-        auto.setAantalUrenGereden(50);
+        auto.setAantalUrenGebruikt(50);
         auto.updateKilometerstand(1);
     }
 
     public double berekenKosten(AbonnementType abonnementType) {
-        int overschredenUren = auto.getAantalUrenGereden() - ((int) Duration.between(beginTijd, eindTijd).toHours());
+        int overschredenUren = auto.getAantalUrenGebruikt() - ((int) Duration.between(beginTijd, eindTijd).toHours());
         System.out.println("overschredenUren: " + overschredenUren);
         Betaling betaling = new Betaling(periodeType, auto.berekenKilometerVerschil(), overschredenUren);
         switch (abonnementType) {
