@@ -8,11 +8,10 @@ import ooad.casus.redcars.strategies.*;
 public class Betaling {
     private IBetalingStrategy betalingStrategy;
     private PeriodeType periodeType;
-    private double kilometers;
+    BetalingBerekeningen berekening;
 
     public Betaling(AbonnementType abonnementType, PeriodeType periodeType, AutoType autoType, double kilometers) {
         this.periodeType = periodeType;
-        this.kilometers = kilometers;
         switch(abonnementType) {
             case BETAALD:
                 if (autoType == AutoType.PERSONEN) {
@@ -31,6 +30,7 @@ public class Betaling {
                 }
                 break;
         }
+        berekening = new BetalingBerekeningen(betalingStrategy, periodeType, kilometers);
     }
 
     public double berekenTotaalprijs(int periodeDuur, int urenGereden) {
@@ -57,38 +57,7 @@ public class Betaling {
                 }
                 break;
         }
-        System.out.println("km: " + berekenKilometerprijs() + " | huur: " + berekenHuurprijs(periodeDuur) + " | boete:" + berekenBoetebedrag(periodeDuur, periodeOverschredenUren));
-        return berekenKilometerprijs() + berekenHuurprijs(periodeDuur) + berekenBoetebedrag(periodeDuur, periodeOverschredenUren);
-    }
-
-    private double berekenKilometerprijs() {
-        return betalingStrategy.getPrijsPerKilometer() * kilometers;
-    }
-
-    private double berekenHuurprijs(int periodeDuur) {
-        return berekenPeriodePrijs(periodeType, periodeDuur);
-    }
-
-    private double berekenBoetebedrag(int periodeDuur, int periodeOverschredenUren) {
-        if (periodeOverschredenUren > 0) {
-            double huurPrijs = berekenPeriodePrijs(periodeType, periodeDuur);
-            double boetebedrag = berekenPeriodePrijs(PeriodeType.UUR, periodeOverschredenUren);
-            return huurPrijs + boetebedrag;
-        }
-        return 0;
-    }
-
-    private double berekenPeriodePrijs(PeriodeType periodeType, int periode) {
-        switch(periodeType) {
-            case UUR:
-                return betalingStrategy.getPrijsPerUur() * periode;
-            case DAG:
-                return betalingStrategy.getPrijsPerDag() * periode;
-            case WEEKEND:
-                return betalingStrategy.getPrijsPerWeekend() * periode;
-            case WEEK:
-                return betalingStrategy.getPrijsPerWeek() * periode;
-        }
-        return 0;
+        System.out.println("km: " + berekening.berekenKilometerprijs() + " | huur: " + berekening.berekenHuurprijs(periodeDuur) + " | boete:" + berekening.berekenBoetebedrag(periodeDuur, periodeOverschredenUren));
+        return berekening.berekenKilometerprijs() + berekening.berekenHuurprijs(periodeDuur) + berekening.berekenBoetebedrag(periodeDuur, periodeOverschredenUren);
     }
 }
