@@ -24,8 +24,8 @@ public class Gebruiker {
         lidmaatschapspas = new Lidmaatschapspas();
     }
 
-    public void maakReservering() {
-        reservering = new Reservering(PeriodeType.DAG, AutoType.STATION, abonnementType, LocalDateTime.now());
+    public void maakReservering(PeriodeType periodeType, AutoType autoType, LocalDateTime beginTijd) {
+        reservering = new Reservering(periodeType, autoType, abonnementType, beginTijd);
     }
 
     public double berekenKosten() {
