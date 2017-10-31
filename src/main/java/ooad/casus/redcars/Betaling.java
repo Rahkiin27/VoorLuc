@@ -39,7 +39,7 @@ public class Betaling {
 
     private double berekenBoeteBedrag() {
         if (overschredenUren > 0) {
-            return betalingStrategy.getPrijsPerUur() * overschredenUren;
+            return betalingStrategy.getPrijsPerUur() * overschredenUren + berekenHuurprijs();
         }
         return 0;
     }

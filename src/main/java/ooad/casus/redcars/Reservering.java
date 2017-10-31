@@ -17,8 +17,10 @@ public class Reservering {
     private PeriodeType periodeType;
     private LocalDateTime beginTijd;
     private LocalDateTime eindTijd;
+    private AbonnementType abonnementType;
 
-    public Reservering(PeriodeType periodeType, AutoType autoType, LocalDateTime beginTijd) {
+    public Reservering(PeriodeType periodeType, AutoType autoType, LocalDateTime beginTijd, AbonnementType abonnementType) {
+        this.abonnementType = abonnementType;
         this.periodeType = periodeType;
         this.autoType = autoType;
         this.beginTijd = beginTijd;
@@ -30,7 +32,7 @@ public class Reservering {
         auto.updateKilometerstand(1);
     }
 
-    public double berekenKosten(AbonnementType abonnementType) {
+    public double berekenKosten() {
         int overschredenUren = auto.getAantalUrenGebruikt() - ((int) Duration.between(beginTijd, eindTijd).toHours());
         System.out.println("overschredenUren: " + overschredenUren);
         Betaling betaling = new Betaling(periodeType, auto.berekenKilometerVerschil(), overschredenUren);

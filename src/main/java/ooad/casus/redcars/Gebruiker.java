@@ -10,6 +10,7 @@ public class Gebruiker {
     private String voornaam, achternaam, email, adres, woonplaats, bankrekeningnummer;
     private AbonnementType abonnementType;
     private Lidmaatschapspas lidmaatschapspas;
+    private Reservering reservering;
 
     public Gebruiker(String voornaam, String achternaam, String email, String adres, String woonplaats, String bankrekeningnummer, AbonnementType abonnementType) {
         this.voornaam = voornaam;
@@ -24,6 +25,10 @@ public class Gebruiker {
     }
 
     public void maakReservering() {
-        Reservering reservering = new Reservering(PeriodeType.DAG, AutoType.STATION, LocalDateTime.now());
+        reservering = new Reservering(PeriodeType.DAG, AutoType.STATION, LocalDateTime.now());
+    }
+
+    public double berekenKosten() {
+        return reservering.berekenKosten(abonnementType);
     }
 }
