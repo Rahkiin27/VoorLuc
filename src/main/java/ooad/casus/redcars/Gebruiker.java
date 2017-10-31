@@ -40,14 +40,6 @@ public class Gebruiker {
         return 0;
     }
 
-    public void setAbonnementType(AbonnementType abonnementType) {
-        this.abonnementType = abonnementType;
-    }
-
-    public void setActief(boolean actief) {
-        isActief = actief;
-    }
-
     public void setVoornaam(String voornaam) {
         this.voornaam = voornaam;
     }
@@ -70,5 +62,13 @@ public class Gebruiker {
 
     public void setBankrekeningnummer(String bankrekeningnummer) {
         this.bankrekeningnummer = bankrekeningnummer;
+    }
+
+    public void setActief(boolean actief) {
+        isActief = actief;
+    }
+
+    public void setAbonnementType(AbonnementType abonnementType) {
+        this.abonnementType = abonnementType;
     }
 }
