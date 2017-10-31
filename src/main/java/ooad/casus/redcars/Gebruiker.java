@@ -25,10 +25,10 @@ public class Gebruiker {
     }
 
     public void maakReservering() {
-        reservering = new Reservering(PeriodeType.DAG, AutoType.STATION, LocalDateTime.now());
+        reservering = new Reservering(PeriodeType.DAG, AutoType.STATION, LocalDateTime.now(), abonnementType);
     }
 
     public double berekenKosten() {
-        return reservering.berekenKosten(abonnementType);
+        return reservering.berekenKosten();
     }
 }
