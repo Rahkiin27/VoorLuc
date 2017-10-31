@@ -33,9 +33,7 @@ public class Reservering {
     }
 
     public double berekenKosten() {
-        int overschredenUren = auto.getAantalUrenGebruikt() - ((int) Duration.between(beginTijd, eindTijd).toHours());
-        System.out.println("overschredenUren: " + overschredenUren);
-        Betaling betaling = new Betaling(periodeType, auto.berekenKilometerVerschil(), overschredenUren);
+        Betaling betaling = new Betaling(periodeType, auto.berekenKilometerVerschil(), berekenOverschredenUren());
         switch (abonnementType) {
             case BETAALD:
                 switch (autoType) {
@@ -57,7 +55,12 @@ public class Reservering {
                         break;
                 }
                 break;
-        } return betaling.berekenTotaalprijs();
+        }
+        return betaling.berekenTotaalprijs();
+    }
+
+    private int berekenOverschredenUren() {
+        return auto.getAantalUrenGebruikt() - ((int) Duration.between(beginTijd, eindTijd).toHours());
     }
 
     private LocalDateTime berekenEindTijd() {
