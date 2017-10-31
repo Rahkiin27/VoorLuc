@@ -19,7 +19,7 @@ public class Reservering {
     private LocalDateTime eindTijd;
     private AbonnementType abonnementType;
 
-    public Reservering(PeriodeType periodeType, AutoType autoType, LocalDateTime beginTijd, AbonnementType abonnementType) {
+    public Reservering(PeriodeType periodeType, AutoType autoType, AbonnementType abonnementType, LocalDateTime beginTijd) {
         this.abonnementType = abonnementType;
         this.periodeType = periodeType;
         this.autoType = autoType;
