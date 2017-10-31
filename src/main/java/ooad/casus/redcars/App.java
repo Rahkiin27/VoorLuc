@@ -14,11 +14,10 @@ public class App {
     }
 
     private void testBetaling() {
-        AutoType autoType = AutoType.STATION;
+        Gebruiker gebruiker = new Gebruiker("Voornaam", "Achternaam", "email.emailadres@emailadres.email", "Tolhuis7319",
+                                                        "Nijmegen", "NL83INGB142987", AbonnementType.BETAALD);
 
-        LocalDateTime beginTijd = LocalDateTime.of(2000, 12, 1, 1, 0, 0, 0);
-
-        Reservering reservering = new Reservering(PeriodeType.WEEKEND, autoType, beginTijd);
-        System.out.println(reservering.berekenKosten(AbonnementType.BETAALD));
+        gebruiker.maakReservering();
+        System.out.println("Kosten van de reservering: " + gebruiker.berekenKosten());
     }
 }
