@@ -18,6 +18,7 @@ public class App {
                                                         "Nijmegen", "NL83INGB142987", AbonnementType.BETAALD);
 
         gebruiker.maakReservering(PeriodeType.UUR, 5, AutoType.STATION, LocalDateTime.now());
-        System.out.println("Kosten van de reservering: " + gebruiker.berekenKosten());
+        gebruiker.gebruikAuto();
+        gebruiker.stopGebruikAuto();
     }
 }

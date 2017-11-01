@@ -20,7 +20,7 @@ public class Reservering {
     private LocalDateTime eindTijd;
     private AbonnementType abonnementType;
 
-    public Reservering(PeriodeType periodeType, int periodeAantal, AutoType autoType, AbonnementType abonnementType, LocalDateTime beginTijd) {
+    public Reservering(PeriodeType periodeType, int periodeAantal, AutoType autoType, AbonnementType abonnementType, LocalDateTime beginTijd, long pasnummer) {
         this.abonnementType = abonnementType;
         this.periodeType = periodeType;
         this.autoType = autoType;
@@ -30,11 +30,11 @@ public class Reservering {
         eindTijd = berekenEindTijd();
         System.out.println("Periode gereserveerd: " + periodeAantal + " " + periodeType);
 
-        auto = new Auto("Nijmegen", "FU-CK-ME", 100000);
+        auto = new Auto("Nijmegen", "FU-CK-ME", pasnummer);
     }
 
     public double berekenKosten() {
-        Betaling betaling = new Betaling(periodeType, auto.berekenKilometerVerschil(), berekenOverschredenUren());
+        Betaling betaling = new Betaling(periodeType, auto.getKilometersGereden(), berekenOverschredenUren());
         switch (abonnementType) {
             case BETAALD:
                 switch (autoType) {
@@ -80,5 +80,9 @@ public class Reservering {
                 eindTijd = eindTijd.plusDays(7 * periodeAantal);
         }
         return eindTijd;
+    }
+
+    public Auto getAuto() {
+        return auto;
     }
 }

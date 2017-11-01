@@ -29,15 +29,15 @@ public class Gebruiker {
 
     public void maakReservering(PeriodeType periodeType, int periodeAantal, AutoType autoType, LocalDateTime beginTijd) {
         if (isActief) {
-            reservering = new Reservering(periodeType, periodeAantal, autoType, abonnementType, beginTijd);
+            reservering = new Reservering(periodeType, periodeAantal, autoType, abonnementType, beginTijd, lidmaatschapspas.getPasnummer());
         }
     }
 
-    public double berekenKosten() {
+    public void stopGebruikAuto() {
         if (reservering != null) {
-            return reservering.berekenKosten();
+            System.out.println("Kosten van de reservering: " + reservering.berekenKosten());
+            reservering.getAuto().meldAf(lidmaatschapspas.getPasnummer());
         }
-        return 0;
     }
 
     public void setAbonnementType(AbonnementType abonnementType) {
@@ -70,5 +70,9 @@ public class Gebruiker {
 
     public void setBankrekeningnummer(String bankrekeningnummer) {
         this.bankrekeningnummer = bankrekeningnummer;
+    }
+
+    public void gebruikAuto() {
+        reservering.getAuto().meldAan(lidmaatschapspas.getPasnummer());
     }
 }

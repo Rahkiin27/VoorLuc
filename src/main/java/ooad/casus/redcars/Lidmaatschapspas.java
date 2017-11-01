@@ -6,7 +6,10 @@ public class Lidmaatschapspas {
     private long pasnummer;
 
     public Lidmaatschapspas() {
-        Random rnd = new Random();
-        pasnummer = 100000 + rnd.nextInt(900000);
+        this.pasnummer = 1234567890;
+    }
+
+    public long getPasnummer() {
+        return pasnummer;
     }
 }
