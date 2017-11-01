@@ -28,8 +28,6 @@ public class Reservering {
         eindTijd = berekenEindTijd();
 
         auto = new Auto("Nijmegen", "FU-CK-ME", 100000);
-        auto.setAantalUrenGebruikt(50);
-        auto.updateKilometerstand(1);
     }
 
     public double berekenKosten() {

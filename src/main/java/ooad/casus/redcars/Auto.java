@@ -1,31 +1,29 @@
 package ooad.casus.redcars;
 
 public class Auto {
+    private AutoModule autoModule;
     private String standplaats, kenteken;
-    private double kilometerstand, vorigeKilometerstand;
-    private int urenGebruikt;
 
     public Auto(String standplaats, String kenteken, double kilometerstand) {
         this.standplaats = standplaats;
         this.kenteken = kenteken;
-        this.kilometerstand = kilometerstand;
 
-        vorigeKilometerstand = kilometerstand;
+        autoModule = new AutoModule();
     }
 
     public double berekenKilometerVerschil() {
-        return (kilometerstand - vorigeKilometerstand);
-    }
-
-    public void updateKilometerstand(double geredenKilometers) {
-        kilometerstand = kilometerstand + geredenKilometers;
+        return autoModule.getKilometersGereden();
     }
 
     public int getAantalUrenGebruikt() {
-        return urenGebruikt;
+        return autoModule.getUrenGebruikt();
     }
 
-    public void setAantalUrenGebruikt(int uren) {
-        this.urenGebruikt = uren;
+    public void setStandplaats(String standplaats) {
+        this.standplaats = standplaats;
+    }
+
+    public void setKenteken(String kenteken) {
+        this.kenteken = kenteken;
     }
 }
