@@ -28,6 +28,7 @@ public class Reservering {
         this.periodeAantal = periodeAantal;
 
         eindTijd = berekenEindTijd();
+        System.out.println("Periode gereserveerd: " + periodeAantal + " " + periodeType);
 
         auto = new Auto("Nijmegen", "FU-CK-ME", 100000);
     }
