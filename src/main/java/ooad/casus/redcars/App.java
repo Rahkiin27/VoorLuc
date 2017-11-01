@@ -17,7 +17,7 @@ public class App {
         Gebruiker gebruiker = new Gebruiker("Voornaam", "Achternaam", "email.emailadres@emailadres.email", "Tolhuis7319",
                                                         "Nijmegen", "NL83INGB142987", AbonnementType.BETAALD);
 
-        gebruiker.maakReservering();
+        gebruiker.maakReservering(PeriodeType.UUR, 5, AutoType.STATION, LocalDateTime.now());
         System.out.println("Kosten van de reservering: " + gebruiker.berekenKosten());
     }
 }

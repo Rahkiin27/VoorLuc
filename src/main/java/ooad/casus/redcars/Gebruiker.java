@@ -27,9 +27,9 @@ public class Gebruiker {
         lidmaatschapspas = new Lidmaatschapspas();
     }
 
-    public void maakReservering(PeriodeType periodeType, AutoType autoType, LocalDateTime beginTijd) {
+    public void maakReservering(PeriodeType periodeType, int periodeAantal, AutoType autoType, LocalDateTime beginTijd) {
         if (isActief) {
-            reservering = new Reservering(periodeType, autoType, abonnementType, beginTijd);
+            reservering = new Reservering(periodeType, periodeAantal, autoType, abonnementType, beginTijd);
         }
     }
 

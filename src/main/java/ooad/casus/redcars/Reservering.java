@@ -15,15 +15,17 @@ public class Reservering {
     private Auto auto;
     private AutoType autoType;
     private PeriodeType periodeType;
+    private int periodeAantal;
     private LocalDateTime beginTijd;
     private LocalDateTime eindTijd;
     private AbonnementType abonnementType;
 
-    public Reservering(PeriodeType periodeType, AutoType autoType, AbonnementType abonnementType, LocalDateTime beginTijd) {
+    public Reservering(PeriodeType periodeType, int periodeAantal, AutoType autoType, AbonnementType abonnementType, LocalDateTime beginTijd) {
         this.abonnementType = abonnementType;
         this.periodeType = periodeType;
         this.autoType = autoType;
         this.beginTijd = beginTijd;
+        this.periodeAantal = periodeAantal;
 
         eindTijd = berekenEindTijd();
 
@@ -54,7 +56,7 @@ public class Reservering {
                 }
                 break;
         }
-        return betaling.berekenTotaalprijs();
+        return betaling.berekenTotaalprijs(periodeAantal);
     }
 
     private int berekenOverschredenUren() {
@@ -65,16 +67,16 @@ public class Reservering {
         LocalDateTime eindTijd = LocalDateTime.from(beginTijd);
         switch (periodeType) {
             case UUR:
-                eindTijd = eindTijd.plusHours(1);
+                eindTijd = eindTijd.plusHours(1 * periodeAantal);
                 break;
             case DAG:
-                eindTijd = eindTijd.plusDays(1);
+                eindTijd = eindTijd.plusDays(1 * periodeAantal);
                 break;
             case WEEKEND:
-                eindTijd = eindTijd.plusDays(2);
+                eindTijd = eindTijd.plusDays(2 * periodeAantal);
                 break;
             case WEEK:
-                eindTijd = eindTijd.plusDays(7);
+                eindTijd = eindTijd.plusDays(7 * periodeAantal);
         }
         return eindTijd;
     }

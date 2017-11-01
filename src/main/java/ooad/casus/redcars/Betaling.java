@@ -15,31 +15,32 @@ public class Betaling {
         this.overschredenUren = overschredenUren;
     }
 
-    public double berekenTotaalprijs() {
-        return berekenKilometerTotaalprijs() + berekenHuurprijs() + berekenBoeteBedrag();
+    public double berekenTotaalprijs(int periodeAantal) {
+        System.out.println("Kilomterprijs: " + berekenKilometerTotaalprijs() + " | Huurprijs: " + berekenHuurprijs(periodeAantal) + " | Boete: " + berekenBoeteBedrag(periodeAantal));
+        return berekenKilometerTotaalprijs() + berekenHuurprijs(periodeAantal) + berekenBoeteBedrag(periodeAantal);
     }
 
     private double berekenKilometerTotaalprijs() {
         return betalingStrategy.getPrijsPerKilometer() * geredenKilometers;
     }
 
-    private double berekenHuurprijs() {
+    private double berekenHuurprijs(int periodeAantal) {
         switch (periodeType) {
             case UUR:
-                return betalingStrategy.getPrijsPerUur();
+                return betalingStrategy.getPrijsPerUur() * periodeAantal;
             case DAG:
-                return betalingStrategy.getPrijsPerDag();
+                return betalingStrategy.getPrijsPerDag() * periodeAantal;
             case WEEKEND:
-                return betalingStrategy.getPrijsPerWeekend();
+                return betalingStrategy.getPrijsPerWeekend() * periodeAantal;
             case WEEK:
-                return betalingStrategy.getPrijsPerWeek();
+                return betalingStrategy.getPrijsPerWeek() * periodeAantal;
         }
         return 0;
     }
 
-    private double berekenBoeteBedrag() {
+    private double berekenBoeteBedrag(int periodeAantal) {
         if (overschredenUren > 0) {
-            return betalingStrategy.getPrijsPerUur() * overschredenUren + berekenHuurprijs();
+            return betalingStrategy.getPrijsPerUur() * overschredenUren + berekenHuurprijs(periodeAantal);
         }
         return 0;
     }
